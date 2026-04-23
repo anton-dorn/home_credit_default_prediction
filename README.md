@@ -9,7 +9,6 @@ is still very high.
 
 LLM Usage: While mainly serving as a data project for the seminar thesis, I also want it to be an example project for potential employers to show my data literacy
 and understanding of SQL, Python and PowerBI. Using LLMs without actually understanding the code ("Vibe-Coding") and data would be missleading, thus I limited the usage of LLMs (mainly Claude Sonnet 4.6)
-to understanding the distribution of the data in the columns of the original table scraped from Kaggle and identifying potential important features in the dataset. Every line of code has been written without the
-help of LLMs and I fully understand, what the code does.
+to understanding the distribution of the data in the columns of the original table scraped from Kaggle, identifying potential important features in the dataset and bug fixes. I fully understand, what the code does.
 
 Competition: The dataset was published by Home Credit for a Kaggle-Competition. While I used the dataset, I did not participate the competition and the results are completely independend of it.
