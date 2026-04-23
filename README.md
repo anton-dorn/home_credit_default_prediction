@@ -1,7 +1,10 @@
 # home_credit_default_prediction
 
 This project was part of a seminar paper "Gradient Boosting Machines & XGBoost" at University of Hamburg Business School.
-It's objective was to show how GBMs and XGBoost compare to the less complex models logstic regression and simple classification trees.
+Its objective was to show how GBMs and XGBoost compare to the less complex models logstic regression and simple classification trees for a binary classification problem.
+
+
+Observations & Disclaimers:
 
 It is important to note that the data might underly an important selection bias. Home Credit might only have accepted potential credit takers that were likely to pay back their credit to begin with,
 thus, the model has only been trained for this subset of every credit applier. But because the general trends and correlations of the data are likely to also apply for other people, the practical usage of the model
