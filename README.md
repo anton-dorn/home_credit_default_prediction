@@ -3,6 +3,12 @@
 This project was part of a seminar paper "Gradient Boosting Machines & XGBoost" at University of Hamburg Business School.
 Its objective was to show how GBMs and XGBoost compare to the less complex models logstic regression and simple classification trees for a binary classification problem.
 
+Explanation of the files:
+sample.csv: a 100 row sample of the final table aggregated via SQL and used in python
+loading_data.ipynb: python code run locally to install the datasets to mySQL
+feature_engineering.sql: SQL code used to aggregate all tables with the application_train dataset and to engineer 142 new features
+main.ipynb: python code for creating models etc.
+
 For exporting home_credit_table to a csv file, the mySQL exporting wizard was used and the columns SK_ID_CURR where all removed from the final csv.
 
 Observations & Disclaimers:
