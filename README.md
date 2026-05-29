@@ -2,6 +2,9 @@
 
 This project was part of a seminar paper on Gradient Boosting Machines & XGBoost at the University of Hamburg Business School. The dataset originates from a Kaggle competition by Home Credit on credit default risk prediction.
 
+## Observations & Disclaimers
+It is important to note that the data may be subject to selection bias. Home Credit may have only accepted applicants who were likely to repay their credit, meaning the dataset represents only a subset of all applicants.
+
 ## Feature Engineering
 This repository consists of a feature engineering pipeline across 7 tables. In total, 142 new features were engineered and added to the main table via SQL. The final CSV file was used in a Python machine learning pipeline in Google Colab.
 
@@ -19,9 +22,6 @@ Next, Logistic Regression and XGBoost were additionally trained on the full trai
 - `home_credit_main.ipynb`: Python code to train and compare Logistic Regression, GBMs and XGBoost
 
 For exporting the final table to CSV, the MySQL export wizard was used. The SK_ID_CURR column was removed from the final CSV.
-
-## Observations & Disclaimers
-It is important to note that the data may be subject to selection bias. Home Credit may have only accepted applicants who were likely to repay their credit, meaning the dataset represents only a subset of all applicants.
 
 ## Source
 Anna Montoya, inversion, KirillOdintsov, and Martin Kotek. Home Credit Default Risk. https://kaggle.com/competitions/home-credit-default-risk, 2018. Kaggle.
