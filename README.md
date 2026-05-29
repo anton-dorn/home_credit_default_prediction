@@ -16,3 +16,6 @@ For exporting the final table to CSV, the MySQL export wizard was used. The SK_I
 
 ## Observations & Disclaimers
 It is important to note that the data may be subject to selection bias. Home Credit may have only accepted applicants who were likely to repay their credit, meaning the dataset represents only a subset of all applicants.
+
+## Sources
+Anna Montoya, inversion, KirillOdintsov, and Martin Kotek. Home Credit Default Risk. https://kaggle.com/competitions/home-credit-default-risk, 2018. Kaggle.
