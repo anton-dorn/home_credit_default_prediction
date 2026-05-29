@@ -2,14 +2,17 @@
 
 This project was part of a seminar paper on Gradient Boosting Machines & XGBoost at the University of Hamburg Business School. The dataset originates from a Kaggle competition by Home Credit on credit default risk prediction.
 
-This repository consists mainly of the feature engineering pipeline across 7 tables. In total, 142 new features were engineered and added to the main table.
+This repository consists of a feature engineering pipeline across 7 tables. In total, 142 new features were engineered and added to the main table. The final main csv file was used in a Python machine learning pipeline in Google Colab.
 
-Explanation of the files:
-sample.csv: a 100 row sample of the final table aggregated via SQL
-loading_data.ipynb: python code run locally to install the dataset to MySQL
-feature_engineering.sql: SQL code used to aggregate all tables with the application_train dataset and to engineer 142 new features
+Missing values were identified and imputed. The dataframe was split into an 80% training set and 20% test set. A comparison of three models was conducted: Logistic Regression, GBMs and XGBoost. First, all models were trained on 30% of the training set and evaluated on the test set to ensure comparability. GBMs have extremely long training duration in Python, which is why a hyperparameter search on the full training set would require too many resources. Since this was part of a theoretical paper on GBMs and XGBoost, all models were given the same training set to ensure equal conditions. The results show that Logistic Regression is beaten by GBMs, which is beaten by XGBoost. Next, Logistic Regression and XGBoost were additionally trained on the full training set. The Logistic Regression still underperformed GBMs despite the larger training set, which further demonstrates the superiority of tree-based models for this task. The best model, XGBoost trained on the full training set, achieved an AUC of 0.782 and a recall of 0.65.
 
-For exporting home_credit_table to a csv file, the MySQL exporting wizard was used and the columns SK_ID_CURR were all removed from the final csv.
+## Files
+- `sample.csv`: a 100-row sample of the final table aggregated via SQL
+- `loading_data.ipynb`: Python code run locally to load the dataset into MySQL
+- `feature_engineering.sql`: SQL code used to aggregate all tables with the application_train dataset and engineer 142 new features
+- `home_credit_main.ipynb`: Python code to train and compare Logistic Regression, GBMs and XGBoost
 
-Observations & Disclaimers:
-It is important to note that the data might underly an important selection bias. Home Credit might only have accepted potential credit takers that were likely to pay back their credit to begin with, thus the dataset only includes a selection of all applicants.
+For exporting the final table to CSV, the MySQL export wizard was used. The SK_ID_CURR column was removed from the final CSV.
+
+## Observations & Disclaimers
+It is important to note that the data may be subject to selection bias. Home Credit may have only accepted applicants who were likely to repay their credit, meaning the dataset represents only a subset of all applicants.
