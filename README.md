@@ -6,7 +6,7 @@ This project was part of a seminar paper on Gradient Boosting Machines & XGBoost
 It is important to note that the data may be subject to selection bias. Home Credit may have only accepted applicants who were likely to repay their credit, meaning the dataset represents only a subset of all applicants.
 
 ## Feature Engineering
-This repository consists of a feature engineering pipeline across 7 tables. In total, 142 new features were engineered and added to the main table via SQL. The final CSV file was used in a Python machine learning pipeline in Google Colab.
+The SQL file consists of a feature engineering pipeline across 7 tables. In total, 142 new features were engineered and added to the main table via SQL. The final CSV file was used in a Python machine learning pipeline in Google Colab.
 
 ## Machine Learning Pipeline
 Missing values were identified and imputed. The dataframe was split into an 80% training set and 20% test set. A comparison of three models was conducted: Logistic Regression, GBMs and XGBoost.
