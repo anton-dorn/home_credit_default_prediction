@@ -1,5 +1,4 @@
 # home_credit_default_prediction
-
 This project was part of a seminar paper on Gradient Boosting Machines & XGBoost at the University of Hamburg Business School. The dataset originates from a Kaggle competition by Home Credit on credit default risk prediction.
 
 ## Observations & Disclaimers
@@ -9,11 +8,11 @@ It is important to note that the data may be subject to selection bias. Home Cre
 The SQL file consists of a feature engineering pipeline across 7 tables. In total, 142 new features were engineered and added to the main table via SQL. The final CSV file was used in a Python machine learning pipeline in Google Colab.
 
 ## Machine Learning Pipeline
-Missing values were identified and imputed. The dataframe was split into an 80% training set and 20% test set. A comparison of three models was conducted: Logistic Regression, GBMs and XGBoost.
+Missing values were identified and imputed with the value "Unknown". The dataframe was split into an 80% training set and 20% test set using stratified sampling to preserve the class distribution of the binary target variable.
 
-First, all models were trained on 30% of the training set and evaluated on the test set to ensure comparability. GBMs have extremely long training duration in Python, which is why a hyperparameter search on the full training set would require too many resources. Since this was part of a theoretical paper on GBMs and XGBoost, all models were given the same training set to ensure equal conditions. The results show that Logistic Regression is beaten by GBMs, which is beaten by XGBoost.
+Three models were trained on the full training set and evaluated on the test set: Logistic Regression as a baseline, a Gradient Boosting Machine (GBM), and XGBoost. Class imbalance (~8% defaults) was addressed via sample weighting. A hyperparameter search via RandomizedSearchCV was conducted for XGBoost and the resulting optimal parameters were transferred to the GBM, following the hypothesis that both models are structurally similar.
 
-Next, Logistic Regression and XGBoost were additionally trained on the full training set. The Logistic Regression still underperformed GBMs despite the larger training set, which further demonstrates the superiority of tree-based models for this task. The best model, XGBoost trained on the full training set, achieved an AUC of 0.782 and a recall of 0.65.
+The best model, GBM, achieved an AUC of 0.783 and a Recall of 0.65 on the test set.
 
 ## Files
 - `sample.csv`: a 100-row sample of the final table aggregated via SQL
