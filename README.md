@@ -1,26 +1,43 @@
-# home_credit_default_prediction
-This project was part of a seminar paper on Gradient Boosting Machines & XGBoost at the University of Hamburg Business School. The dataset originates from a Kaggle competition by Home Credit on credit default risk prediction.
+# Home Credit Default Risk Prediction
 
-## Observations & Disclaimers
-It is important to note that the data may be subject to selection bias. Home Credit may have only accepted applicants who were likely to repay their credit, meaning the dataset represents only a subset of all applicants.
+This project was built as part of a seminar paper on Gradient Boosting Machines and XGBoost at Hamburg Business School (University of Hamburg). The data comes from the Kaggle competition "Home Credit Default Risk" (2018): a binary classification task to predict whether a loan applicant will default.
+
+## Pipeline Overview
+
+1. Load the raw Kaggle tables into MySQL (`loading_data.ipynb`)
+2. Feature engineering in SQL across 7 tables (`feature_engineering.sql`)
+3. Model training and evaluation in Python on Google Colab (`home_credit_main.ipynb`)
 
 ## Feature Engineering
-The SQL file consists of a feature engineering pipeline across 7 tables. In total, 142 new features were engineered and added to the main table via SQL. The final CSV file was used in a Python machine learning pipeline in Google Colab.
 
-## Machine Learning Pipeline
-Missing values were identified and imputed with the value "Unknown". The dataframe was split into an 80% training set and 20% test set using stratified sampling to preserve the class distribution of the binary target variable.
+The SQL pipeline joins 7 tables and adds 142 engineered features to the main application table, for example `ratio_annuity_income` and `avg_debt_to_credit_ratio`. The final table was exported to CSV using the MySQL export wizard. The ID column `SK_ID_CURR` was dropped before modeling.
 
-Three models were trained on the full training set and evaluated on the test set: Logistic Regression as a baseline, a Gradient Boosting Machine (GBM), and XGBoost. Class imbalance (~8% defaults) was addressed via sample weighting. A hyperparameter search via RandomizedSearchCV was conducted for XGBoost and the resulting optimal parameters were transferred to the GBM, following the hypothesis that both models are structurally similar.
+## Modeling
 
-The best model, GBM, achieved an AUC of 0.783 and a Recall of 0.65 on the test set.
+Missing values occurred only in categorical variables and were imputed with the value "Unknown", so that missingness is treated as its own category. The data was split 80/20 into training and test set using stratified sampling to preserve the class distribution of the target (~8% defaults). Class imbalance was addressed through sample weighting.
+
+Three models were trained and compared:
+
+- Logistic Regression as a baseline
+- Gradient Boosting Machine (GBM)
+- XGBoost
+
+Hyperparameters were tuned for XGBoost via RandomizedSearchCV. Because of the compute limits of the Colab environment, no separate search was run for the GBM. Instead, the shared parameters (learning rate, tree depth, number of estimators, subsampling) were transferred from the XGBoost search, since both models build on the same gradient boosting framework. XGBoost-specific regularization parameters have no GBM equivalent and were left out.
+
+**Best model: GBM with an AUC of 0.783 and a recall of 0.65 on the test set** — slightly ahead of XGBoost, even though the parameters were originally tuned for XGBoost.
+
+## Limitations
+
+- The data is likely subject to selection bias. Home Credit only observes the repayment behavior of accepted applicants, so the dataset does not represent the full applicant population.
+- Recall is reported at the default classification threshold of 0.5.
 
 ## Files
-- `sample.csv`: a 100-row sample of the final table aggregated via SQL
-- `loading_data.ipynb`: Python code run locally to load the dataset into MySQL
-- `feature_engineering.sql`: SQL code used to aggregate all tables with the application_train dataset and engineer 142 new features
-- `home_credit_main.ipynb`: Python code to train and compare Logistic Regression, GBMs and XGBoost
 
-For exporting the final table to CSV, the MySQL export wizard was used. The SK_ID_CURR column was removed from the final CSV.
+- `loading_data.ipynb` — loads the raw dataset into MySQL (run locally)
+- `feature_engineering.sql` — joins all tables with `application_train` and engineers the 142 features
+- `home_credit_main.ipynb` — trains and compares Logistic Regression, GBM and XGBoost
+- `sample.csv` — a 100-row sample of the final aggregated table
 
-## Source
-Anna Montoya, inversion, KirillOdintsov, and Martin Kotek. Home Credit Default Risk. https://kaggle.com/competitions/home-credit-default-risk, 2018. Kaggle.
+## Data Source
+
+Anna Montoya, inversion, KirillOdintsov, and Martin Kotek. Home Credit Default Risk. Kaggle, 2018. https://kaggle.com/competitions/home-credit-default-risk
