@@ -24,7 +24,7 @@ Three models were trained and compared:
 
 Hyperparameters were tuned for XGBoost via RandomizedSearchCV. Because of the compute limits of the Colab environment, no separate search was run for the GBM. Instead, the shared parameters (learning rate, tree depth, number of estimators) were transferred from the XGBoost search, since both models build on the same gradient boosting framework. XGBoost-specific regularization parameters have no GBM equivalent and were left out.
 
-**Best model: GBM with an AUC of 0.783 and a recall of 0.65 on the test set**, slightly ahead of XGBoost, even though the parameters were originally tuned for XGBoost.
+**Best model: GBM with an AUC of 0.783 and a recall of 0.67 on the test set**, slightly ahead of XGBoost, even though the parameters were originally tuned for XGBoost.
 
 ## Limitations
 
