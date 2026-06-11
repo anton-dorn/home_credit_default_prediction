@@ -14,7 +14,7 @@ The SQL pipeline joins 7 tables and adds 142 engineered features to the main app
 
 ## Modeling
 
-Missing values occurred only in categorical variables and were imputed with the value "Unknown", so that missingness is treated as its own category. The data was split 80/20 into training and test set using stratified sampling to preserve the class distribution of the target (~8% defaults). Class imbalance was addressed through sample weighting.
+Numeric missing values were zero-imputed during SQL export via the MySQL export wizard. Categorical missing values were imputed with "Unknown" in Python, treating missingness as its own category. Categorical features were then one-hot encoded via `pd.get_dummies`, expanding the feature space from 263 to 392 columns. The data was split 80/20 into training and test set using stratified sampling to preserve the class distribution of the target (~8% defaults). Class imbalance was addressed through sample weighting.
 
 Three models were trained and compared:
 
@@ -24,7 +24,7 @@ Three models were trained and compared:
 
 Hyperparameters were tuned for XGBoost via RandomizedSearchCV. Because of the compute limits of the Colab environment, no separate search was run for the GBM. Instead, the shared parameters (learning rate, tree depth, number of estimators) were transferred from the XGBoost search, since both models build on the same gradient boosting framework. XGBoost-specific regularization parameters have no GBM equivalent and were left out.
 
-**Best model: GBM with an AUC of 0.783 and a recall of 0.67 on the test set**, slightly ahead of XGBoost, even though the parameters were originally tuned for XGBoost.
+**Best model: GBM with an AUC of 0.783 and a recall of 0.67 on the test set** — slightly ahead of XGBoost (AUC 0.782, recall 0.65), even though the parameters were originally tuned for XGBoost.
 
 ## Limitations
 
