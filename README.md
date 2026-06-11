@@ -36,7 +36,6 @@ Hyperparameters were tuned for XGBoost via RandomizedSearchCV. Because of the co
 - `loading_data.ipynb` — loads the raw dataset into MySQL (run locally)
 - `feature_engineering.sql` — joins all tables with `application_train` and engineers the 142 features
 - `home_credit_main.ipynb` — trains and compares Logistic Regression, GBM and XGBoost
-- `sample.csv` — a 100-row sample of the final aggregated table
 
 ## Data Source
 
