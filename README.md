@@ -14,7 +14,7 @@ The SQL pipeline joins 7 tables and adds 142 engineered features to the main app
 
 ## Modeling
 
-Numeric missing values were zero-imputed during SQL export via the MySQL export wizard. Categorical missing values were imputed with "Unknown" in Python, treating missingness as its own category. Categorical features were then one-hot encoded via `pd.get_dummies`, expanding the feature space from 263 to 392 columns. The data was split 80/20 into training and test set using stratified sampling to preserve the class distribution of the target (~8% defaults). Class imbalance was addressed through sample weighting.
+Numeric missing values were zero-imputed during SQL export via the MySQL export wizard. Categorical missing values were imputed with "Unknown" in Python, treating missingness as its own category. Categorical features were then one-hot encoded via `pd.get_dummies`, expanding the feature space from 262 to 392 columns. The data was split 80/20 into training and test set using stratified sampling to preserve the class distribution of the target (~8% defaults). Class imbalance was addressed through sample weighting.
 
 Three models were trained and compared:
 
